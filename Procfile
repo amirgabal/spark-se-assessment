@@ -1,4 +1,4 @@
-web: gunicorn __init__:spark-se-assessment
+web: gunicorn __init__:app
 heroku ps:scale web=1
 
 

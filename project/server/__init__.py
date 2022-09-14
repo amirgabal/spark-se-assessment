@@ -1,5 +1,6 @@
 import os
 import sys
+from flask import Blueprint, request, make_response, jsonify
 
 if os.environ.get('FLASK_COVERAGE'):
     import coverage
@@ -68,3 +69,11 @@ def test(coverage):
             COV.erase()
         return 0
     return 1
+
+@app.route("/users/index")
+def home():
+    all = []
+    list_of_users = User.query.all()
+    for u in list_of_users:
+        all.append([u.email])
+    return jsonify(all)

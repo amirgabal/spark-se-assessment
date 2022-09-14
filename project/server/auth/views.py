@@ -1,4 +1,6 @@
 from flask import Blueprint, request, make_response, jsonify
+# request.reload()
+import requests
 from flask.views import MethodView
 
 from project.server import bcrypt, db
@@ -20,6 +22,8 @@ class RegisterAPI(MethodView):
 
     def post(self):
         # get the post data
+        # post_data = request.get_json()
+        # print(request)
         post_data = request.get_json(); print(request)
         # check if user already exists
         user = User.query.filter_by(email=post_data.get('email')).first()
@@ -38,7 +42,7 @@ class RegisterAPI(MethodView):
                 responseObject = {
                     'status': 'success',
                     'message': 'Successfully registered.',
-                    'auth_token': auth_token.decode()
+                    'auth_token': auth_token
                 }
                 return make_response(jsonify(responseObject)), 201
             except Exception as e:

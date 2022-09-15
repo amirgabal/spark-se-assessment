@@ -1,6 +1,5 @@
 from flask import Blueprint, request, make_response, jsonify
 # request.reload()
-import requests
 from flask.views import MethodView
 
 from project.server import bcrypt, db
